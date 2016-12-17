@@ -15,6 +15,10 @@ def createfile():
     else:
         print("ERROR: " + filename + " already exist! Exiting..")
 
+# TODO: To move files into archive if more than a week
+def archiveFiles():
+    pass
+
 
 def main():
     createfile()
