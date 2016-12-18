@@ -1,7 +1,7 @@
 """createTodoFile.py: Creates an todo file with title name as current date"""
 
-import time
 import os.path
+import time
 
 
 def createfile():
@@ -12,12 +12,13 @@ def createfile():
         with open(filename, "a") as myfile:
             myfile.write("[RESULTS - {}]".format(date))
         print("INFO: " + filename + " created!")
+        addfileToSublime(filename)
     else:
         print("ERROR: " + filename + " already exist! Exiting..")
 
-# TODO: To move files into archive if more than a week
-def archiveFiles():
-    pass
+
+def addfileToSublime(file):
+    os.system("subl --add " + file)
 
 
 def main():
