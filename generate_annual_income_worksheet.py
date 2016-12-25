@@ -11,18 +11,11 @@ __author__ = "Prajesh Ananthan 2016"
 
 def create_excel_sheet(year):
     workbook = None
-    tablerange = 'B3:D7'
+    table_position = 'B3:D7'
     filename = getfilename()
     success = False
-    data = get_itemlist_with_values()
-    options = {'data': data,
-               'columns':
-                   [
-                       {'header': 'ITEM'},
-                       {'header': 'COST'},
-                       {'header': 'STATUS'}
-                   ]
-               }
+    [header_title, item_list] = get_data()
+    options = {'data': item_list, 'columns': header_title}
 
     try:
         workbook = xlsxwriter.Workbook('output/{}'.format(filename))
@@ -31,7 +24,7 @@ def create_excel_sheet(year):
         for month in monthlist:
             worksheet = workbook.add_worksheet(name=month)
             worksheet.set_column(1, 3, 15)
-            worksheet.add_table(tablerange, options)
+            worksheet.add_table(table_position, options)
         success = True
         print("INFO: {} created!".format(workbook.filename))
 
@@ -79,8 +72,14 @@ def getfilename():
 
 
 # TODO: Insert more items
-def get_itemlist_with_values():
-    data = [
+def get_data():
+    title_list = [
+        {'header': 'ITEM'},
+        {'header': 'COST'},
+        {'header': 'STATUS'}
+    ]
+
+    item_list = [
         ['Car Monthly Installement', 481],
         ['House Rent', 450],
         ['PTPTN', 105.42],
@@ -88,7 +87,7 @@ def get_itemlist_with_values():
         ['Touch \'N Go', 64],
         ['Unifi', 200]
     ]
-    return data
+    return [title_list, item_list]
 
 
 def main():
