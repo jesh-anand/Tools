@@ -72,6 +72,7 @@ def getfilename():
 
 
 # TODO: Insert more items
+# TODO: Parse content into json file
 def get_data():
     title_list = [
         {'header': 'ITEM'},
