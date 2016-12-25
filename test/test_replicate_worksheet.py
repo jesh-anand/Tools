@@ -9,7 +9,9 @@ def test_create_XLSheet():
     workbook = xlsxwriter.Workbook('resources/{}'.format(getfilename()))
     monthslist = test_get_list_months()
     for month in monthslist:
-        workbook.add_worksheet(name=month)
+        worksheet = workbook.add_worksheet(name=month)
+        data = get_mock_columns_with_data()
+        worksheet.add_table('B3:F7', {'data': data})
         # worksheet1.write(month, "123")
     workbook.close()
 
@@ -40,8 +42,16 @@ def getfilename():
     return filename
 
 
-def test_Copy_Worksheet():
-    pass
+def get_mock_columns_with_data():
+    data = [
+        ['Item', 'Cost'],
+        ['Apples', 10000, 5000, 8000, 6000],
+        ['Pears', 2000, 3000, 4000, 5000],
+        ['Bananas', 6000, 6000, 6500, 6000],
+        ['Oranges', 500, 300, 200, 700],
+
+    ]
+    return data
 
 
 def run_test_cases():
