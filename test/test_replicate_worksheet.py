@@ -32,7 +32,7 @@ def test_get_list_months():
 
 
 def getfilename():
-    prefix = "ANNUAL-INCOME_STATS"
+    prefix = "ANNUAL_CASHFLOW"
     year = "2017"
     extension = ".xlsx"
     filename = "{}--{}{}".format(prefix, year, extension)
