@@ -1,24 +1,61 @@
 import calendar
+import os
 from datetime import *
 
 import xlsxwriter
 
+"""test_replicate_worksheet.py: IT on Income Statement Excel workbook"""
+
+__author__ = "Prajesh Ananthan"
+
 
 def test_create_XLSheet():
-    print(getfilename())
-    workbook = xlsxwriter.Workbook('resources/{}'.format(getfilename()))
-    monthslist = test_get_list_months()
-    for month in monthslist:
-        worksheet = workbook.add_worksheet(name=month)
-        data = get_mock_columns_with_data()
-        worksheet.add_table('B3:F7', {'data': data})
-        # worksheet1.write(month, "123")
-    workbook.close()
+    workbook = None
+    tablerange = 'B3:D7'
+    filename = getfilename()
+    success = False
+    data = get_mock_columns_with_data()
+    options = {'data': data,
+               'columns':
+                   [
+                       {'header': 'ITEM'},
+                       {'header': 'COST'},
+                       {'header': 'STATUS'}
+                   ]
+               }
+
+    try:
+        workbook = xlsxwriter.Workbook('output/{}'.format(filename))
+        monthlist = test_get_list_months()
+
+        for month in monthlist:
+            worksheet = workbook.add_worksheet(name=month)
+            worksheet.set_column(1, 3, 15)
+            worksheet.add_table(tablerange, options)
+        success = True
+        print("INFO: {} created!".format(workbook.filename))
+
+    except Exception as e:
+        print(e, "Unable to write onto {}!".format(filename))
+    finally:
+        workbook.close()
+
+    return [success, workbook.filename]
+
+
+def launchFileInWindows(unixpath):
+    win32path = os.path.normcase(unixpath)
+    try:
+        if os.path.exists(win32path):
+            print("INFO: Launching {}...".format(win32path))
+            os.system(win32path)
+    except Exception as e:
+        print(e)
 
 
 def test_get_list_months():
-    date1 = datetime.strptime("2016-01-01", "%Y-%m-%d")
-    date2 = datetime.strptime("2017-01-12", "%Y-%m-%d")
+    date1 = datetime.strptime("2017-01-01", "%Y-%m-%d")
+    date2 = datetime.strptime("2018-01-12", "%Y-%m-%d")
     months_str = calendar.month_name
     months = []
     while date1 < date2:
@@ -37,26 +74,24 @@ def getfilename():
     prefix = "ANNUAL_CASHFLOW"
     year = "2017"
     extension = ".xlsx"
-    filename = "{}--{}{}".format(prefix, year, extension)
 
-    return filename
+    return "{}--{}{}".format(prefix, year, extension)
 
 
 def get_mock_columns_with_data():
     data = [
-        ['Item', 'Cost'],
-        ['Apples', 10000, 5000, 8000, 6000],
-        ['Pears', 2000, 3000, 4000, 5000],
-        ['Bananas', 6000, 6000, 6500, 6000],
-        ['Oranges', 500, 300, 200, 700],
-
+        ['PTPTN', 10000],
+        ['Rent', 2000],
+        ['Car Loan', 6000],
+        ['Unifi', 500]
     ]
     return data
 
 
 def run_test_cases():
-    test_create_XLSheet()
-    # test_get_list_months()
+    [success, filename] = test_create_XLSheet()
+    if success == True:
+        launchFileInWindows(filename)
 
 
 if __name__ == '__main__':
