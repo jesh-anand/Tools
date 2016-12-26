@@ -93,4 +93,3 @@ ENV/
 
 # ignore files
 *.xlst
-data.json
