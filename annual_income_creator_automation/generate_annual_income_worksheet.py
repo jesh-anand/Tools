@@ -11,7 +11,7 @@ __author__ = "Prajesh Ananthan 2016"
 
 def create_excel_sheet(year):
     workbook = None
-    table_position = 'B3:D7'
+    table_position = 'B3:D13'
     filename = getfilename()
     success = False
     [header_title, item_list] = get_data()
@@ -71,7 +71,6 @@ def getfilename():
     return "{}--{}{}".format(prefix, year, extension)
 
 
-# TODO: Insert more items
 # TODO: Parse content into json file
 def get_data():
     title_list = [
@@ -84,9 +83,13 @@ def get_data():
         ['Car Monthly Installement', 481],
         ['House Rent', 450],
         ['PTPTN', 105.42],
-        ['Rapid KL', 500],
+        ['Rapid KL', 180],
         ['Touch \'N Go', 64],
-        ['Unifi', 200]
+        ['Unifi', 200],
+        ['Winter Clothes Installment', 150],
+        ['Maxis Bill', 85],
+        ['Fuel', 200],
+        ['Food', 200]
     ]
     return [title_list, item_list]
 
