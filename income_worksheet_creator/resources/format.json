@@ -1,0 +1,15 @@
+{
+  "merge_format": {
+    "bold": 2,
+    "border": 2,
+    "align": "center",
+    "valign": "vcenter",
+    "fg_color": "yellow"
+  },
+  "position": {
+    "table": "B3:D13",
+    "merge_range": "B2:D2"
+  }
+}
+
+
