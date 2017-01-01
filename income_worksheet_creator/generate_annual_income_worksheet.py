@@ -1,4 +1,5 @@
 import calendar
+import json
 import os
 from datetime import *
 
@@ -71,11 +72,12 @@ def getfilename():
     return "{}--{}{}".format(prefix, year, extension)
 
 
-def get_json_path():
-    return "resources/data.json"
+def load_json():
+    path = 'resources/data.json'
+    content = json.load(open(path))
+    return content
 
 
-# TODO: Parse content into json file
 def get_data():
     title_list = [
         {'header': 'ITEM'},
@@ -83,18 +85,15 @@ def get_data():
         {'header': 'STATUS'}
     ]
 
-    item_list = [
-        ['Car Monthly Installement', 481],
-        ['House Rent', 450],
-        ['PTPTN', 105.42],
-        ['Rapid KL', 180],
-        ['Touch \'N Go', 64],
-        ['Unifi', 200],
-        ['Winter Clothes Installment', 150],
-        ['Maxis Bill', 85],
-        ['Fuel', 200],
-        ['Food', 200]
-    ]
+    content = load_json()
+
+    item_list = []
+    for data_type in content:
+        for item_name in content[data_type]:
+            cost = content[data_type][item_name]
+            current_item_list = [item_name, cost]
+            item_list.append(current_item_list)
+
     return [title_list, item_list]
 
 
