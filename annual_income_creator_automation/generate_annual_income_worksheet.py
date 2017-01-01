@@ -71,6 +71,10 @@ def getfilename():
     return "{}--{}{}".format(prefix, year, extension)
 
 
+def get_json_path():
+    return "resources/data.json"
+
+
 # TODO: Parse content into json file
 def get_data():
     title_list = [
