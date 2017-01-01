@@ -13,18 +13,29 @@ __author__ = "Prajesh Ananthan 2016"
 def create_excel_sheet(year):
     workbook = None
     table_position = 'B3:D13'
+    merge_range = 'B2:D2'
+    column_header_title = 'MONTHLY CASHFLOW'
     filename = getfilename()
     success = False
+
     [header_title, item_list] = get_data()
     options = {'data': item_list, 'columns': header_title}
 
     try:
         workbook = xlsxwriter.Workbook('output/{}'.format(filename))
+        merge_format = workbook.add_format({
+            'bold': 2,
+            'border': 2,
+            'align': 'center',
+            'valign': 'vcenter',
+            'fg_color': 'yellow'})
+
         monthlist = getListofMonths(year)
 
         for month in monthlist:
             worksheet = workbook.add_worksheet(name=month)
-            worksheet.set_column(1, 3, 15)
+            worksheet.set_column(1, 3, 20)
+            worksheet.merge_range(merge_range, column_header_title, merge_format)
             worksheet.add_table(table_position, options)
         success = True
         print("INFO: {} created!".format(workbook.filename))
