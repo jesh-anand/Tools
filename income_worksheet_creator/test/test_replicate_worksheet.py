@@ -28,9 +28,17 @@ def test_create_XLSheet():
         workbook = xlsxwriter.Workbook('output/{}'.format(filename))
         monthlist = test_get_list_months()
 
+        merge_format = workbook.add_format({
+            'bold': 2,
+            'border': 2,
+            'align': 'center',
+            'valign': 'vcenter',
+            'fg_color': 'yellow'})
+
         for month in monthlist:
             worksheet = workbook.add_worksheet(name=month)
             worksheet.set_column(1, 3, 15)
+            worksheet.merge_range('B2:D2', 'MERGED RANGE', merge_format)
             worksheet.add_table(tablerange, options)
         success = True
         print("INFO: {} created!".format(workbook.filename))
@@ -71,7 +79,7 @@ def test_get_list_months():
 
 
 def getfilename():
-    prefix = "ANNUAL_CASHFLOW"
+    prefix = "TEST_ANNUAL_CASHFLOW"
     year = "2017"
     extension = ".xlsx"
 
@@ -80,10 +88,10 @@ def getfilename():
 
 def get_mock_columns_with_data():
     data = [
-        ['PTPTN', 10000],
-        ['Rent', 2000],
-        ['Car Loan', 6000],
-        ['Unifi', 500]
+        ['Item1', 10000],
+        ['Item2', 2000],
+        ['Item3', 6000],
+        ['Item4', 500]
     ]
     return data
 
