@@ -15,7 +15,7 @@ def create_excel_sheet(year):
     table_position = 'B3:D13'
     merge_range = 'B2:D2'
     column_header_title = 'MONTHLY CASHFLOW'
-    output = 'output/{}'
+    output_path = 'output/{}'
     filename = getfilename()
     success = False
 
@@ -23,7 +23,7 @@ def create_excel_sheet(year):
     options = {'data': item_list, 'columns': header_title}
 
     try:
-        workbook = xlsxwriter.Workbook(output.format(filename))
+        workbook = xlsxwriter.Workbook(output_path.format(filename))
         merge_format = workbook.add_format({
             'bold': 2,
             'border': 2,
