@@ -2,15 +2,14 @@
 import os
 import time
 
+from todo_file_generator.test import constants
+
 
 def get_files():
     files_array = []
-    files_directory = 'files/'
-    extension = 'todo'
-    for file in os.listdir(files_directory):
-        if file.endswith(extension):
+    for file in os.listdir(constants.FILES_DIRECTORY):
+        if file.endswith(constants.FILE_EXTENSION):
             files_array.append(file)
-
     return files_array
 
 
@@ -19,20 +18,17 @@ def move_file(source, target):
 
 
 def test_should_return_file_duration():
-    files_directory = 'files/'
-    archive_directory = 'archive/'
-    date_format = '%Y-%m-%d %H:%M:%S'
     one_week = time.time() - (60 * 60 * 24 * 7)
     file_list = get_files()
     for file in file_list:
-        file_path = files_directory + file
+        file_path = constants.FILES_DIRECTORY + file
         file_stat = os.stat(file_path)
         modified_time = file_stat.st_mtime
-        file_creation_time = time.strftime(date_format, time.localtime(modified_time))
+        file_creation_time = time.strftime(constants.DATE_FORMAT, time.localtime(modified_time))
         if modified_time < one_week:
             print('Moving {} | Creation date: [{}]'.format(file, file_creation_time))
-            target_path = files_directory + archive_directory + file
-            move_file(file_path, target_path)
+            target_path = constants.FILES_DIRECTORY + constants.ARCHIVE_DIRECTORY + file
+            # move_file(file_path, target_path)
 
 
 def main():
