@@ -1,7 +1,8 @@
 import xlsxwriter
 
 # Create a workbook and add a worksheet.
-workbook = xlsxwriter.Workbook('output/test_formula.xlsx')
+output_file = 'output/test_formula.xlsx'
+workbook = xlsxwriter.Workbook(output_file)
 worksheet = workbook.add_worksheet()
 
 # Add a bold format to use to highlight cells.
