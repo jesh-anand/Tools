@@ -13,8 +13,8 @@ def get_files():
     return files_array
 
 
-def move_file(source, target):
-    os.rename(source, target)
+def remove_file(source, target):
+    os.unlink(source, target)
 
 
 def test_should_return_file_duration():
@@ -28,7 +28,7 @@ def test_should_return_file_duration():
         if modified_time < one_week:
             print('Moving {} | Creation date: [{}]'.format(file, file_creation_time))
             target_path = constants.FILES_DIRECTORY + constants.ARCHIVE_DIRECTORY + file
-            # move_file(file_path, target_path)
+            # remove_file(file_path, target_path)
 
 
 def main():
