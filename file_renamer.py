@@ -1,6 +1,6 @@
 import os
-import sys
-from logger import printDebug
+
+from logger import DEBUG
 
 """ file_renamer. py: This script renames plain numbered files with meaningful prefixes"""
 
@@ -15,7 +15,7 @@ def main():
         formattedTitle = PREFIX + "_" + srcTitle
         if srcTitle.startswith(formattedTitle):
             continue
-        printDebug("Renaming '{}' to '{}'".format(srcTitle, formattedTitle))
+            DEBUG("Renaming '{}' to '{}'".format(srcTitle, formattedTitle))
         os.rename(srcTitle, formattedTitle)
 
 
