@@ -15,7 +15,7 @@ def main():
         formattedTitle = PREFIX + "_" + srcTitle
         if srcTitle.startswith(formattedTitle):
             continue
-            DEBUG("Renaming '{}' to '{}'".format(srcTitle, formattedTitle))
+        DEBUG("Renaming '{}' to '{}'".format(srcTitle, formattedTitle))
         os.rename(srcTitle, formattedTitle)
 
 
