@@ -6,13 +6,14 @@ from logger import DEBUG
 
 
 def main():
-    PATH = r"D:\Google Drive\Notes\Book_Summaries\Code_Complete"
-    PREFIX = "code_complete"
+    path = 'INSERT_PATH'
+    prefix = "INSERT_PREFIX"
+    directory = r"{}".format(path)
 
-    os.chdir(PATH)
+    os.chdir(directory)
 
-    for srcTitle in os.listdir(PATH):
-        formattedTitle = PREFIX + "_" + srcTitle
+    for srcTitle in os.listdir(directory):
+        formattedTitle = prefix + "_" + srcTitle
         if srcTitle.startswith(formattedTitle):
             continue
         DEBUG("Renaming '{}' to '{}'".format(srcTitle, formattedTitle))
