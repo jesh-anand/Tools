@@ -23,5 +23,5 @@ class FileManager(object):
 
 
 if __name__ == '__main__':
-    util = FileManager('../Downloads', '../Movies')
+    util = FileManager(target='../Downloads', destination='../Movies')
     util.manage()
